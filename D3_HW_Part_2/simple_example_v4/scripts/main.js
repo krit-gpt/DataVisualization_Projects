@@ -113,54 +113,54 @@
 
 			console.log(list)
 
-			updateCircles();
+			updateCircles(elapsed);
 
-			timer.restart(timerCallback);
+			//timer.restart(timerCallback);
 		}
 
 
-		function updateCircles(){
-			// var dots = chart.plotArea.selectAll(".dot")
-		 // 	.data(list)
-		 // 	.enter()
-		 // 	.append("circle")
-		 // 	.attr("class", "dot")
-		 // 	.attr("cx", function(d,i) { return chart.xScale(d.xVal);})
-		 // 	.attr("cy", function(d){ return chart.yScale(d.yVal);})
-		 // 	.attr("r", circleRadius)
-		 // 	.transition()
-		 // 	.delay(function(d,i){ return 100*i; })
-		 // 	.duration(1500)
-		 // 	.attr("cx", function(d){ return chart.xScale(d.xVal-60);})
-		}
-
-		
-/////////////////////////////////  EARLIER CODE //////////////////////////
-		// plot dots
-		 for(var i = 0; i <data.length; i++){
-		 	//dataxval = data[i].xVal;
-		 	//datayval = data[i].yVal;
-		 	list.push(data[i])
-		 	//console.log(list);
-		 	// list2 = [1,2,3]
-		 	// console.log(list2);
-
-		 	console.log(list)
-
-
-		 	var dots = chart.plotArea.selectAll(".dot")
+		function updateCircles(elapsed){
+			var dots = chart.plotArea.selectAll(".dot")
 		 	.data(list)
 		 	.enter()
 		 	.append("circle")
 		 	.attr("class", "dot")
-		 	.attr("cx", function(d,i) { return chart.xScale(d.xVal);})
+		 	.attr("cx", function(d,i) { return chart.xScale(elapsed);})
 		 	.attr("cy", function(d){ return chart.yScale(d.yVal);})
 		 	.attr("r", circleRadius)
 		 	.transition()
 		 	.delay(function(d,i){ return 100*i; })
 		 	.duration(1500)
 		 	.attr("cx", function(d){ return chart.xScale(d.xVal-60);})
- }
+		}
+
+		
+/////////////////////////////////  EARLIER CODE //////////////////////////
+		// plot dots
+	// 	 for(var i = 0; i <data.length; i++){
+	// 	 	//dataxval = data[i].xVal;
+	// 	 	//datayval = data[i].yVal;
+	// 	 	list.push(data[i])
+	// 	 	//console.log(list);
+	// 	 	// list2 = [1,2,3]
+	// 	 	// console.log(list2);
+
+	// 	 	console.log(list)
+
+
+	// 	 	var dots = chart.plotArea.selectAll(".dot")
+	// 	 	.data(list)
+	// 	 	.enter()
+	// 	 	.append("circle")
+	// 	 	.attr("class", "dot")
+	// 	 	.attr("cx", function(d,i) { return chart.xScale(d.xVal);})
+	// 	 	.attr("cy", function(d){ return chart.yScale(d.yVal);})
+	// 	 	.attr("r", circleRadius)
+	// 	 	.transition()
+	// 	 	.delay(function(d,i){ return 100*i; })
+	// 	 	.duration(1500)
+	// 	 	.attr("cx", function(d){ return chart.xScale(d.xVal-60);})
+ // }
 
 
  ////////////////////////////////// DIVISION //////////////////////////////
