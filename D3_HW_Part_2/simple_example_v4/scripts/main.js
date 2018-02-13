@@ -4,7 +4,7 @@
 	var width = 400;
 	var height = 300;
 
-	var dataXRange = { min: 40, max: 100 };
+	var dataXRange = { min: 0, max: 40 };
 	var dataYRange = { min: 0, max: 100 };
 	var xAxisLabelHeader = "X Header";
 	var yAxisLabelHeader = "Y Header";
@@ -108,6 +108,7 @@
 
 		function timerCallback(elapsed){
 
+			if(elapsed > 200){
 			list.push(data[i]);
 			i ++;
 
@@ -115,7 +116,8 @@
 
 			updateCircles(elapsed);
 
-			//timer.restart(timerCallback);
+			timer.restart(timerCallback);
+			}
 		}
 
 
@@ -125,7 +127,7 @@
 		 	.enter()
 		 	.append("circle")
 		 	.attr("class", "dot")
-		 	.attr("cx", function(d,i) { return chart.xScale(elapsed);})
+		 	.attr("cx", function(d,i) { return chart.xScale(d.xVal);})
 		 	.attr("cy", function(d){ return chart.yScale(d.yVal);})
 		 	.attr("r", circleRadius)
 		 	.transition()
