@@ -112,9 +112,11 @@
 			list.push(data[i]);
 			i ++;
 
+
 			console.log(list)
 
 			updateCircles(elapsed);
+			//updateAxis();
 
 			timer.restart(timerCallback);
 			}
@@ -124,16 +126,72 @@
 		function updateCircles(elapsed){
 			var dots = chart.plotArea.selectAll(".dot")
 		 	.data(list)
-		 	.enter()
+
+
+		 dots.enter()
 		 	.append("circle")
 		 	.attr("class", "dot")
 		 	.attr("cx", function(d,i) { return chart.xScale(d.xVal);})
 		 	.attr("cy", function(d){ return chart.yScale(d.yVal);})
 		 	.attr("r", circleRadius)
+		 	.style("fill", "blue")
+		 	.merge(dots)
 		 	.transition()
-		 	.delay(function(d,i){ return 100*i; })
-		 	.duration(1500)
-		 	.attr("cx", function(d){ return chart.xScale(d.xVal-60);})
+		 	.duration(1800)
+		 	.attr("cx", function(d, i){ return chart.xScale(d.xVal - elapsed);})
+
+		 dots.exit().transition()
+		 	.duration(100)
+		 	.style("fill", "orange")
+		 	.remove();
+
+		}
+
+
+		function updateAxis(){
+
+			chart.xScale = d3.scaleLinear()
+			.domain([dataXRange.min, dataXRange.max])
+			.range([0, chartWidth]); //will draw the line, NOT THE TICKS!!!!
+
+		chart.xAxis = d3.axisBottom()
+			.tickSizeOuter(10)  //will draw the end of the X AXIS ticks!
+			.scale(chart.xScale);
+
+		chart.xAxisContainer = chart.append("g")
+			.attr("class", "x axis scatter-xaxis")
+			.attr("transform", "translate(" + (margin.left) + ", " + (chartHeight + margin.top) + ")")
+			.call(chart.xAxis);
+
+		// x axis header label
+		chart.append("text")
+			.attr("class", "x axis scatter-xaxis")
+			.style("font-size", "12px")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate(" + (margin.left + chartWidth / 2.0) + ", " + (chartHeight + (margin.bottom / 2.0)) + ")")
+			.text(xAxisLabelHeader);
+
+		// y axis labels
+		chart.yScale = d3.scaleLinear()
+			.domain([dataYRange.min, dataYRange.max])
+			.range([chartHeight, 0]);
+
+		chart.yAxis = d3.axisLeft()
+			.scale(chart.yScale);
+
+		chart.yAxisContainer = chart.append("g")
+			.attr("class", "y axis scatter-yaxis")
+			.attr("transform", "translate(" + margin.left + ", " + margin.top + ")")
+			.call(chart.yAxis);
+
+		// y axis header label
+		chart.append('text')
+			.style("font-size", "12px")
+			.attr("class", "heatmap-yaxis")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate(" + (margin.left / 2.0) + ", " + (chartHeight / 2.0) + ") rotate(-90)")
+			.text(yAxisLabelHeader);
+
 		}
 
 		
