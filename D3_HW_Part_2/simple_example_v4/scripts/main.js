@@ -104,19 +104,32 @@
 
 		var timer = d3.timer(timerCallback);
 		var i = 0
-		console.log(123);
+		// console.log(123);
 
 		function timerCallback(elapsed){
 
-			if(elapsed > 200){
+			// console.log(elapsed);
+
+			if(elapsed > 150){
 			list.push(data[i]);
 			i ++;
 
+			//Piyush
 
-			console.log(list)
+			if(i==20){
+				console.log(list[0].xVal)
+				list.shift();
+				console.log(list[0].xVal)
+			}
+			//
+
+			// console.log(elapsed)
+
+			// console.log(list)
+			//console.log(elapsed)
 
 			updateCircles(elapsed);
-			//updateAxis();
+			updateAxis();
 
 			timer.restart(timerCallback);
 			}
@@ -137,11 +150,11 @@
 		 	.style("fill", "blue")
 		 	.merge(dots)
 		 	.transition()
-		 	.duration(1800)
+		 	.duration(2500)
 		 	.attr("cx", function(d, i){ return chart.xScale(d.xVal - elapsed);})
 
 		 dots.exit().transition()
-		 	.duration(100)
+		 	.duration(1000)
 		 	.style("fill", "orange")
 		 	.remove();
 
